@@ -11,6 +11,8 @@
 /build
 
 .env
+.env.backup
+
 # misc
 .DS_Store
 .env.local
