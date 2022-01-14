@@ -43,7 +43,7 @@ export default function HomePage() {
     const prefix = '$(BUSD)  ';
 
     const [loading, setLoading] = useState(false); 
-    const [idoStatus, setIdoStatus] = useState(null); // 0: not started, 1: started, 2: ended, 3: unknown
+    const [idoStatus, setIdoStatus] = useState(3); // 0: not started, 1: started, 2: ended, 3: unknown
     const [alert, setAlert] = useState(null);
     const [fundingGoal, setFundingGoal] = useState(0);
     const [softCap, setSoftCap] = useState(50);
@@ -384,8 +384,8 @@ export default function HomePage() {
                                     <div className={classes.idoContract}>
                                         <div className={classes.flexContainerCenter}>
                                             <img src={notebookIcon} style={{marginRight: "20px"}} alt="IDO Contract" />
-                                            <div className="presale-contract">
-                                                { 'IDO Contract: ' + getContractAddress()}
+                                            <div className={idoContractAddress}>
+                                                { 'IDO Contract: ' + showWalletAddress(idoContractAddress)}
                                             </div>
                                             <img src={copyIcon}  style={{marginLeft: "20px"}} onClick={copyContractAddr} alt="Copy Contract Address" />
                                         </div>
@@ -397,7 +397,7 @@ export default function HomePage() {
                                                     <div style={{marginBottom: "10px"}}>Remaining Limit: </div>
                                                 </GridItem>
                                                 <GridItem xs={6} sm={6} md={12}>
-                                                    <div className={classes.yellowText}>{remainingLimit.toLocaleString()} BUSD</div>
+                                                    { idoStatus !== 3 ? (<div className={classes.yellowText}>{remainingLimit.toLocaleString()} BUSD</div>) : (<></>) }
                                                 </GridItem>
                                             </GridContainer>
                                         </GridItem>
@@ -426,6 +426,8 @@ export default function HomePage() {
                                     </div>
                                     ) : (<></>) }
                                     <div style={{textAlign: "center", margin: "20px"}}>
+                                        { idoStatus === 1 ? (
+                                        <>
                                         <CurrencyInput
                                             id="validationCustom01"
                                             name="input-1"
@@ -437,6 +439,7 @@ export default function HomePage() {
                                             step={1}
                                         />
                                         <div className={classes.invalidFeedback}>{errorMessage}</div>
+                                        </> ) : (<></>) }
                                         { account && active ? (                                            
                                                 <>
                                                     { idoStatus === 1 ? (
@@ -456,7 +459,9 @@ export default function HomePage() {
                                         <ConnectWallet />         
                                     </div> 
                                 </div>
-                                <div className={classes.blockDivider}></div>
+                                { idoStatus !== 3 ? (
+                                <>
+                                <div className={classes.blockDivider}></div>                                
                                 <div className={classes.countDownBlock}>                                    
                                     <div className={classes.countDownTitle}>
                                         { idoStatus === 0 ? (<>Ido Sale Starts In:</>) : idoStatus === 1 ? (<>Ido Sale Ends In:</>) : (<>Ido Sale Ended</>)}
@@ -467,7 +472,7 @@ export default function HomePage() {
                                             renderer={renderer}
                                         />) : (<></>) }
                                 </div>
-                                <div className={classes.blockDivider}></div>
+                                <div className={classes.blockDivider}></div>                                
                                 <div className={classes.progressBlock}>
                                     <div className="blockTitle">
                                         Progress
@@ -488,6 +493,7 @@ export default function HomePage() {
                                         <span className="value">{fundingGoal.toLocaleString()} BBOT</span>
                                     </div>
                                 </div>
+                                </> ) : (<></>) }
                             </div>
                         </CardBody>
                     </Card>

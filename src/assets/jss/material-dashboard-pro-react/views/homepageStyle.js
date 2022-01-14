@@ -171,7 +171,7 @@ const homePageStyle = theme => ({
         marginTop: "20px",
         fontSize: "80%",
         color: "#dc3545"
-    },
+    },    
     idoBuyButton: {
         minWidth: "140px",
         fontFamily: 'NauSea',

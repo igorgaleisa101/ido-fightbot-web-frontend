@@ -12,6 +12,7 @@
 
 .env
 .env.backup
+.env.test
 
 # misc
 .DS_Store
