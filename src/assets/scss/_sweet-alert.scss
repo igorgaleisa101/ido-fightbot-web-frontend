@@ -1,0 +1,37 @@
+.sweet-alert {
+    &.customSweetAlert {        
+        font-family: 'NauSea';        
+        -webkit-text-stroke-color: #000;
+        -webkit-text-stroke-width: 0.5px;
+        color: white !important;
+        background-color: #4A007D !important;
+        border-radius: 0;
+        border: 3px solid rgb(255, 250, 21);
+        box-shadow: rgba(255, 250, 21, 0.3) 0px 0px 12px inset, rgba(255, 250, 21, 0.5) 0px 0px 20px;
+
+        h2 {
+            -webkit-text-stroke-color: #fff;
+            -webkit-text-stroke-width: 0.1px;
+            color: #C91F36;
+            font-family: 'NauSea';
+        }
+
+        .btn {
+            color: #fff;
+            font-size: 20px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            min-width: 120px;
+            border: 2px solid #FF7777 !important;
+            background-color: transparent;
+            -webkit-text-stroke-color: #000;
+            -webkit-text-stroke-width: 0.5px;
+            box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 12px inset, rgba(255, 255, 255, 0.5) 0px 0px 12px !important;
+            transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            &:hover {
+                cursor: pointer;
+                background-color: #FF7777;   
+            }
+        }
+    }
+}
