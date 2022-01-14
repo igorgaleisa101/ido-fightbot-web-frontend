@@ -45,7 +45,7 @@ export default function HomePage() {
     const [loading, setLoading] = useState(false); 
     const [idoStatus, setIdoStatus] = useState(3); // 0: not started, 1: started, 2: ended, 3: unknown
     const [alert, setAlert] = useState(null);
-    const [fundingGoal, setFundingGoal] = useState(0);
+    const [fundingGoal, setFundingGoal] = useState(2100000);
     const [softCap, setSoftCap] = useState(50);
     const [hardCap, setHardCap] = useState(100);
     const [remainingLimit, setRemainingLimit] = useState(0);
@@ -262,13 +262,16 @@ export default function HomePage() {
             // console.log(endDate);
             // console.log(currentDate);
     
-            if(currentDate <= startDate)
+            if(currentDate <= startDate) {
                 setTargetDateStr(startDateStr);
-            else if(currentDate > startDate && currentDate < endDate)
+                setIdoStatus(0);
+            } else if(currentDate > startDate && currentDate < endDate) {
                 setTargetDateStr(endDateStr);
-            else setTargetDateStr(''); 
-            
-            return;
+                setIdoStatus(1);
+            } else {
+                setTargetDateStr(''); 
+                setIdoStatus(2);
+            }
         }
 
         getDateStr();
@@ -474,6 +477,7 @@ export default function HomePage() {
                                 </div>
                                 <div className={classes.blockDivider}></div>                                
                                 <div className={classes.progressBlock}>
+                                    { account && active ? (<>
                                     <div className="blockTitle">
                                         Progress
                                     </div>
@@ -488,6 +492,7 @@ export default function HomePage() {
                                         <img className={classes.startFlagIcon} src={startFlagIcon} alt="StartFlag" />                                        
                                         <img className={classes.endFlagIcon} src={endFlagIcon} alt="EndFlag" />                                        
                                     </div>
+                                    </>) : (<></>)}
                                     <div className={classes.totalSupply}>
                                         <span className="desc">Ido Sale Token Supply:&nbsp;</span>
                                         <span className="value">{fundingGoal.toLocaleString()} BBOT</span>
